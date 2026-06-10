@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2f7d59">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="English Patterns">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="english_ai_icon.svg" type="image/svg+xml">
+  <title>Common English Sentence Patterns</title>
+  <style>
+    :root {
+      --ink: #20242a;
+      --muted: #66717f;
+      --line: #d9dee7;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --green: #2f7d59;
+      --blue: #244766;
+      --red: #a8473d;
+      --violet: #6650a4;
+      --gold: #b37b15;
+      --mint: #dff3e4;
+      --sky: #dcecff;
+      --rose: #ffe2df;
+      --lavender: #eee4ff;
+      --honey: #f7e4a8;
+      --shadow: 0 12px 30px rgba(32, 36, 42, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans TC", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(220, 236, 255, 0.8), rgba(251, 250, 247, 0.2) 34%),
+        linear-gradient(315deg, rgba(255, 226, 223, 0.74), rgba(251, 250, 247, 0.18) 40%),
+        var(--paper);
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 0.75fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    .panel,
+    .stats,
+    .card,
+    .practice {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(217, 222, 231, 0.95);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      max-width: 700px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .stats {
+      display: grid;
+      align-content: center;
+      padding: 24px;
+      border-top: 6px solid var(--honey);
+    }
+
+    .date {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .count {
+      margin: 6px 0 0;
+      font-size: 2.6rem;
+      line-height: 1;
+      font-weight: 850;
+    }
+
+    .count span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 650;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .toolbar label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .search-label {
+      width: min(420px, 100%);
+    }
+
+    .voice-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    input[type="search"],
+    select {
+      min-height: 42px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font: inherit;
+      background: #fff;
+    }
+
+    input[type="search"] {
+      width: 100%;
+    }
+
+    select {
+      width: min(360px, 100%);
+    }
+
+    .test-voice {
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--blue);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 760;
+    }
+
+    .voice-hint {
+      flex-basis: 100%;
+      margin: -4px 0 0 auto;
+      color: var(--muted);
+      font-size: 0.84rem;
+      text-align: right;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      overflow: hidden;
+    }
+
+    .card-header {
+      min-height: 128px;
+      padding: 18px;
+      display: grid;
+      align-content: end;
+    }
+
+    .card:nth-child(5n+1) .card-header {
+      background: var(--mint);
+      color: var(--green);
+    }
+
+    .card:nth-child(5n+2) .card-header {
+      background: var(--sky);
+      color: var(--blue);
+    }
+
+    .card:nth-child(5n+3) .card-header {
+      background: var(--rose);
+      color: var(--red);
+    }
+
+    .card:nth-child(5n+4) .card-header {
+      background: var(--lavender);
+      color: var(--violet);
+    }
+
+    .card:nth-child(5n) .card-header {
+      background: var(--honey);
+      color: var(--gold);
+    }
+
+    .tag {
+      width: fit-content;
+      margin-bottom: 14px;
+      padding: 4px 10px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 760;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.45rem;
+      line-height: 1.18;
+    }
+
+    .meaning {
+      margin: 8px 0 0;
+      font-size: 0.95rem;
+      font-weight: 720;
+      opacity: 0.86;
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .pattern-note {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .example {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 10px;
+      align-items: start;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .speak {
+      width: 42px;
+      height: 42px;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f7f8fa;
+      color: var(--blue);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .speak:hover,
+    .speak:focus-visible {
+      background: #edf4ff;
+      outline: 2px solid rgba(36, 71, 102, 0.25);
+      outline-offset: 2px;
+    }
+
+    .example p {
+      margin: 0;
+      font-weight: 760;
+    }
+
+    .example span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .practice {
+      margin-top: 18px;
+      padding: 22px;
+      border-left: 6px solid var(--green);
+    }
+
+    .practice h2 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .practice ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    @media (max-width: 820px) {
+      main {
+        width: min(100% - 22px, 660px);
+        padding-top: 18px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        padding: 24px;
+      }
+
+      .toolbar,
+      .toolbar label,
+      .voice-tools {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      select,
+      .test-voice,
+      .voice-hint {
+        width: 100%;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero" aria-label="Sentence pattern overview">
+      <div class="panel">
+        <p class="eyebrow">Daily English Notebook</p>
+        <h1>Common English Sentence Patterns</h1>
+        <p class="subtitle">&#25226;&#24120;&#29992;&#21477;&#22411;&#25972;&#29702;&#25104;&#21345;&#29255;&#65292;&#27599;&#20491;&#21477;&#22411;&#37117;&#26377;&#31684;&#20363;&#21644;&#35486;&#38899;&#25353;&#37397;&#12290;&#40670;&#19968;&#19979;&#22823;&#32882;&#20844;&#65292;&#23601;&#21487;&#20197;&#29992;&#27604;&#36611;&#33258;&#28982;&#30340;&#33521;&#25991;&#35486;&#38899;&#36319;&#35712;&#12290;</p>
+      </div>
+      <aside class="stats">
+        <p class="date">2026-06-10</p>
+        <p class="count">34<span>review items</span></p>
+      </aside>
+    </section>
+
+    <div class="toolbar">
+      <label class="search-label">
+        Search
+        <input id="searchBox" type="search" placeholder="Type a pattern, for example: what if">
+      </label>
+      <div class="voice-tools">
+        <label>
+          Voice
+          <select id="voiceSelect" aria-label="Choose English voice"></select>
+        </label>
+        <button class="test-voice" id="testVoice" type="button">Test</button>
+        <p class="voice-hint" id="voiceHint">Choose a voice with Natural, Online, Neural, Jenny, or Aria if available.</p>
+      </div>
+    </div>
+
+    <section class="cards" id="cards" aria-label="Sentence pattern cards"></section>
+
+    <section class="practice">
+      <h2>Mini Practice</h2>
+      <ol>
+        <li>Would you mind if I ______ here?</li>
+        <li>How come you ______ so early?</li>
+        <li>I would rather stay home than ______ out tonight.</li>
+        <li>Could I bother you to ______ me a ride?</li>
+      </ol>
+    </section>
+  </main>
+
+  <script>
+    const patterns = [
+      {
+        phrase: "Have you ever...?",
+        meaning: "&#20320;&#26366;&#32147;...&#21966;&#65311;",
+        note: "Ask about someone's life experience.",
+        examples: [
+          ["Have you ever been to Japan?", "&#20320;&#26366;&#32147;&#21435;&#36942;&#26085;&#26412;&#21966;&#65311;"],
+          ["Have you ever tried this pastry?", "&#20320;&#26366;&#32147;&#35430;&#36942;&#36889;&#20491;&#40670;&#24515;&#21966;&#65311;"]
+        ]
+      },
+      {
+        phrase: "I would rather... than...",
+        meaning: "&#25105;&#23527;&#21487;...&#20063;&#19981;&#35201;...",
+        note: "Use it to compare two choices.",
+        examples: [
+          ["I would rather walk than wait for the bus.", "&#25105;&#23527;&#21487;&#36208;&#36335;&#20063;&#19981;&#24819;&#31561;&#20844;&#36554;&#12290;"],
+          ["I would rather study now than worry later.", "&#25105;&#23527;&#21487;&#29694;&#22312;&#35712;&#26360;&#65292;&#20063;&#19981;&#35201;&#20043;&#24460;&#25812;&#24515;&#12290;"]
+        ]
+      },
+      {
+        phrase: "What if...?",
+        meaning: "&#22914;&#26524;...&#24590;&#40636;&#36774;&#65311;",
+        note: "Use it to imagine a possible situation.",
+        examples: [
+          ["What if it rains tomorrow?", "&#22914;&#26524;&#26126;&#22825;&#19979;&#38632;&#24590;&#40636;&#36774;&#65311;"],
+          ["What if we miss the train?", "&#22914;&#26524;&#25105;&#20497;&#37779;&#36942;&#28779;&#36554;&#24590;&#40636;&#36774;&#65311;"]
+        ]
+      },
+      {
+        phrase: "How come...?",
+        meaning: "&#28858;&#20160;&#40636;...&#65311;",
+        note: "A casual way to ask why.",
+        examples: [
+          ["How come you are so quiet today?", "&#20320;&#20170;&#22825;&#24590;&#40636;&#36889;&#40636;&#23433;&#38748;&#65311;"],
+          ["How come the store is closed?", "&#37027;&#23478;&#24215;&#28858;&#20160;&#40636;&#38364;&#20102;&#65311;"]
+        ]
+      },
+      {
+        phrase: "You'd better...",
+        meaning: "&#20320;&#26368;&#22909;...",
+        note: "Give strong advice.",
+        examples: [
+          ["You'd better leave now.", "&#20320;&#26368;&#22909;&#29694;&#22312;&#20986;&#30332;&#12290;"],
+          ["You'd better bring an umbrella.", "&#20320;&#26368;&#22909;&#24118;&#25226;&#38632;&#20632;&#12290;"]
+        ]
+      },
+      {
+        phrase: "I'm afraid...",
+        meaning: "&#24656;&#24597;...&#65307;&#24456;&#25265;&#27465;...",
+        note: "Soften bad news or disagreement.",
+        examples: [
+          ["I'm afraid I can't come tonight.", "&#24656;&#24597;&#25105;&#20170;&#26202;&#19981;&#33021;&#20358;&#12290;"],
+          ["I'm afraid we are out of time.", "&#24656;&#24597;&#25105;&#20497;&#27794;&#26178;&#38291;&#20102;&#12290;"]
+        ]
+      },
+      {
+        phrase: "It sounds like...",
+        meaning: "&#32893;&#36215;&#20358;&#20687;&#26159;...",
+        note: "Use sounds, not sound, after it.",
+        examples: [
+          ["It sounds like a good idea.", "&#36889;&#32893;&#36215;&#20358;&#26159;&#20491;&#22909;&#20027;&#24847;&#12290;"],
+          ["It sounds like you had a busy day.", "&#32893;&#36215;&#20358;&#20320;&#20170;&#22825;&#24456;&#24537;&#12290;"]
+        ]
+      },
+      {
+        phrase: "There's nothing...",
+        meaning: "&#27794;&#26377;&#20160;&#40636;...",
+        note: "Use it when something does not exist or does not matter.",
+        examples: [
+          ["There's nothing to worry about.", "&#27794;&#20160;&#40636;&#22909;&#25812;&#24515;&#30340;&#12290;"],
+          ["There's nothing in the fridge.", "&#20912;&#31665;&#35041;&#27794;&#26377;&#26481;&#35199;&#12290;"]
+        ]
+      },
+      {
+        phrase: "No wonder...",
+        meaning: "&#38627;&#24618;...",
+        note: "Use it when something finally makes sense.",
+        examples: [
+          ["No wonder you are tired.", "&#38627;&#24618;&#20320;&#24456;&#32047;&#12290;"],
+          ["No wonder the room is cold.", "&#38627;&#24618;&#25151;&#38291;&#24456;&#20919;&#12290;"]
+        ]
+      },
+      {
+        phrase: "I didn't mean to...",
+        meaning: "&#25105;&#19981;&#26159;&#25925;&#24847;&#35201;...",
+        note: "Use it to explain an accident or soften an apology.",
+        examples: [
+          ["I didn't mean to hurt your feelings.", "&#25105;&#19981;&#26159;&#25925;&#24847;&#20663;&#20320;&#30340;&#24863;&#24773;&#12290;"],
+          ["I didn't mean to interrupt you.", "&#25105;&#19981;&#26159;&#25925;&#24847;&#25171;&#26039;&#20320;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Are there any...?",
+        meaning: "&#26377;&#20219;&#20309;...&#21966;&#65311;",
+        note: "Ask whether something exists.",
+        examples: [
+          ["Are there any questions?", "&#26377;&#20219;&#20309;&#21839;&#38988;&#21966;&#65311;"],
+          ["Are there any seats available?", "&#36996;&#26377;&#20301;&#32622;&#21966;&#65311;"]
+        ]
+      },
+      {
+        phrase: "You seem to...",
+        meaning: "&#20320;&#20284;&#20046;...",
+        note: "Use it to describe what you notice.",
+        examples: [
+          ["You seem to know a lot about this.", "&#20320;&#20284;&#20046;&#23565;&#36889;&#20491;&#24456;&#20102;&#35299;&#12290;"],
+          ["You seem to be in a good mood.", "&#20320;&#30475;&#36215;&#20358;&#24515;&#24773;&#24456;&#22909;&#12290;"]
+        ]
+      },
+      {
+        phrase: "It's very kind of you to...",
+        meaning: "&#20320;...&#30495;&#26159;&#22826;&#22909;&#20102;",
+        note: "Use it to thank someone politely.",
+        examples: [
+          ["It's very kind of you to help me.", "&#20320;&#24171;&#25105;&#30495;&#26159;&#22826;&#22909;&#20102;&#12290;"],
+          ["It's very kind of you to say that.", "&#20320;&#36889;&#40636;&#35498;&#30495;&#26159;&#22826;&#22909;&#20102;&#12290;"]
+        ]
+      },
+      {
+        phrase: "I would like to...",
+        meaning: "&#25105;&#24819;&#35201;...",
+        note: "A polite way to say want.",
+        examples: [
+          ["I would like to order a coffee.", "&#25105;&#24819;&#40670;&#19968;&#26479;&#21654;&#21857;&#12290;"],
+          ["I would like to ask you a question.", "&#25105;&#24819;&#21839;&#20320;&#19968;&#20491;&#21839;&#38988;&#12290;"]
+        ]
+      },
+      {
+        phrase: "You deserve...",
+        meaning: "&#20320;&#20540;&#24471;...",
+        note: "Use it for praise, rewards, or consequences.",
+        examples: [
+          ["You deserve a break.", "&#20320;&#20540;&#24471;&#20241;&#24687;&#19968;&#19979;&#12290;"],
+          ["You deserve better.", "&#20320;&#20540;&#24471;&#26356;&#22909;&#30340;&#12290;"]
+        ]
+      },
+      {
+        phrase: "That depends on...",
+        meaning: "&#37027;&#35201;&#30475;...",
+        note: "Use it when the answer changes by situation.",
+        examples: [
+          ["That depends on the weather.", "&#37027;&#35201;&#30475;&#22825;&#27683;&#12290;"],
+          ["That depends on how busy I am.", "&#37027;&#35201;&#30475;&#25105;&#26377;&#22810;&#24537;&#12290;"]
+        ]
+      },
+      {
+        phrase: "I have got to...",
+        meaning: "&#25105;&#24517;&#38920;...",
+        note: "Casual spoken English for I have to.",
+        examples: [
+          ["I have got to go now.", "&#25105;&#29694;&#22312;&#24517;&#38920;&#36208;&#20102;&#12290;"],
+          ["I have got to finish this today.", "&#25105;&#20170;&#22825;&#24517;&#38920;&#23436;&#25104;&#36889;&#20491;&#12290;"]
+        ]
+      },
+      {
+        phrase: "I could hardly...",
+        meaning: "&#25105;&#24190;&#20046;&#19981;&#33021;...",
+        note: "Hardly means almost not.",
+        examples: [
+          ["I could hardly hear you.", "&#25105;&#24190;&#20046;&#32893;&#19981;&#21040;&#20320;&#30340;&#35441;&#12290;"],
+          ["I could hardly believe it.", "&#25105;&#24190;&#20046;&#19981;&#25954;&#30456;&#20449;&#12290;"]
+        ]
+      },
+      {
+        phrase: "I look forward to...",
+        meaning: "&#25105;&#26399;&#24453;...",
+        note: "Formal version of looking forward to.",
+        examples: [
+          ["I look forward to meeting you.", "&#25105;&#26399;&#24453;&#33287;&#20320;&#35211;&#38754;&#12290;"],
+          ["I look forward to your reply.", "&#25105;&#26399;&#24453;&#20320;&#30340;&#22238;&#35206;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Could I bother you to...?",
+        meaning: "&#21487;&#20197;&#40635;&#29033;&#20320;...&#21966;&#65311;",
+        note: "A polite way to ask for help.",
+        examples: [
+          ["Could I bother you to check this for me?", "&#21487;&#20197;&#40635;&#29033;&#20320;&#24171;&#25105;&#30906;&#35469;&#36889;&#20491;&#21966;&#65311;"],
+          ["Could I bother you to open the door?", "&#21487;&#20197;&#40635;&#29033;&#20320;&#38283;&#38272;&#21966;&#65311;"]
+        ]
+      },
+      {
+        phrase: "Give me a ride",
+        meaning: "&#36617;&#25105;&#19968;&#31243;",
+        note: "Ask someone to drive you somewhere.",
+        examples: [
+          ["Could you give me a ride home?", "&#20320;&#21487;&#20197;&#36617;&#25105;&#22238;&#23478;&#21966;&#65311;"],
+          ["Thanks for giving me a ride.", "&#35613;&#35613;&#20320;&#36617;&#25105;&#19968;&#31243;&#12290;"]
+        ]
+      },
+      {
+        phrase: "I can't stand...",
+        meaning: "&#25105;&#21463;&#19981;&#20102;...",
+        note: "Use it for something you really dislike.",
+        examples: [
+          ["I can't stand the noise.", "&#25105;&#21463;&#19981;&#20102;&#37027;&#20491;&#22122;&#38899;&#12290;"],
+          ["I can't stand waiting in long lines.", "&#25105;&#21463;&#19981;&#20102;&#25490;&#24456;&#38263;&#30340;&#38538;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Why don't we...?",
+        meaning: "&#25105;&#20497;&#28858;&#20160;&#40636;&#19981;...&#21602;&#65311;",
+        note: "Use it to make a suggestion.",
+        examples: [
+          ["Why don't we take a break?", "&#25105;&#20497;&#28858;&#20160;&#40636;&#19981;&#20241;&#24687;&#19968;&#19979;&#21602;&#65311;"],
+          ["Why don't we catch up this weekend?", "&#25105;&#20497;&#28858;&#20160;&#40636;&#19981;&#36889;&#20491;&#21608;&#26411;&#32842;&#32842;&#21602;&#65311;"]
+        ]
+      },
+      {
+        phrase: "Would you mind if...?",
+        meaning: "&#20320;&#20171;&#24847;&#22914;&#26524;...&#21966;&#65311;",
+        note: "Polite permission question. Use past tense after if.",
+        examples: [
+          ["Would you mind if I sat here?", "&#20320;&#20171;&#24847;&#25105;&#22352;&#36889;&#35041;&#21966;&#65311;"],
+          ["Would you mind if I opened the window?", "&#20320;&#20171;&#24847;&#25105;&#38283;&#31383;&#21966;&#65311;"]
+        ]
+      },
+      {
+        phrase: "Looking forward to...",
+        meaning: "&#26399;&#24453;...",
+        note: "Common in messages. Use V-ing after to.",
+        examples: [
+          ["Looking forward to seeing you soon.", "&#26399;&#24453;&#24456;&#24555;&#35211;&#21040;&#20320;&#12290;"],
+          ["I'm looking forward to the weekend.", "&#25105;&#24456;&#26399;&#24453;&#21608;&#26411;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Catch up",
+        meaning: "&#36245;&#19978;&#65307;&#35036;&#36914;&#24230;&#65307;&#32842;&#22825;&#25944;&#33290;",
+        note: "Use catch up on for tasks, catch up with for people.",
+        examples: [
+          ["I need to catch up on my homework.", "&#25105;&#38656;&#35201;&#35036;&#20316;&#26989;&#36914;&#24230;&#12290;"],
+          ["Let's catch up over coffee.", "&#25105;&#20497;&#21917;&#21654;&#21857;&#32842;&#32842;&#21543;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Imagine",
+        type: "word",
+        meaning: "&#24819;&#20687;",
+        note: "Use it when you picture something in your mind.",
+        examples: [
+          ["Imagine a cozy room with soft light.", "&#24819;&#20687;&#19968;&#20491;&#26377;&#26580;&#21644;&#28783;&#20809;&#30340;&#33298;&#36969;&#25151;&#38291;&#12290;"],
+          ["I can imagine living here.", "&#25105;&#21487;&#20197;&#24819;&#20687;&#20303;&#22312;&#36889;&#35041;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Cozy",
+        type: "word",
+        meaning: "&#33298;&#36969;&#30340;&#65307;&#28331;&#26262;&#30340;",
+        note: "A cozy place feels comfortable, warm, and relaxing.",
+        examples: [
+          ["This cafe is really cozy.", "&#36889;&#23478;&#21654;&#21857;&#24215;&#30495;&#30340;&#24456;&#33298;&#36969;&#12290;"],
+          ["My room feels cozy at night.", "&#25105;&#30340;&#25151;&#38291;&#26202;&#19978;&#24863;&#35258;&#24456;&#28331;&#26262;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Colleague",
+        type: "word",
+        meaning: "&#21516;&#20107;",
+        note: "A person you work with.",
+        examples: [
+          ["My colleague helped me with the report.", "&#25105;&#30340;&#21516;&#20107;&#24171;&#25105;&#20570;&#22577;&#21578;&#12290;"],
+          ["I had lunch with my colleagues.", "&#25105;&#21644;&#21516;&#20107;&#19968;&#36215;&#21507;&#21320;&#39184;&#12290;"]
+        ]
+      },
+      {
+        phrase: "You can ask what they're up to.",
+        type: "sentence",
+        meaning: "&#20320;&#21487;&#20197;&#21839;&#20182;&#20497;&#22312;&#24537;&#20160;&#40636;&#12290;",
+        note: "What are you up to? means what are you doing now or recently.",
+        examples: [
+          ["You can ask what they're up to.", "&#20320;&#21487;&#20197;&#21839;&#20182;&#20497;&#22312;&#24537;&#20160;&#40636;&#12290;"],
+          ["What are you up to this weekend?", "&#20320;&#36889;&#20491;&#21608;&#26411;&#35201;&#20570;&#20160;&#40636;&#65311;"]
+        ]
+      },
+      {
+        phrase: "Chat",
+        type: "word",
+        meaning: "&#32842;&#22825;",
+        note: "A casual talk with someone.",
+        examples: [
+          ["Let's chat after class.", "&#25105;&#20497;&#19979;&#35506;&#24460;&#32842;&#32842;&#21543;&#12290;"],
+          ["I had a nice chat with my colleague.", "&#25105;&#21644;&#21516;&#20107;&#32842;&#24471;&#24456;&#24841;&#24555;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Simple",
+        type: "word",
+        meaning: "&#31777;&#21934;&#30340;",
+        note: "Easy to understand or not complicated.",
+        examples: [
+          ["Keep it simple.", "&#25226;&#23427;&#24324;&#24471;&#31777;&#21934;&#19968;&#40670;&#12290;"],
+          ["This is a simple question.", "&#36889;&#26159;&#19968;&#20491;&#31777;&#21934;&#30340;&#21839;&#38988;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Situation",
+        type: "word",
+        meaning: "&#24773;&#27841;&#65307;&#29376;&#27841;",
+        note: "Use it to talk about the conditions around an event.",
+        examples: [
+          ["This is a difficult situation.", "&#36889;&#26159;&#19968;&#20491;&#22256;&#38627;&#30340;&#24773;&#27841;&#12290;"],
+          ["What would you do in this situation?", "&#22312;&#36889;&#31278;&#24773;&#27841;&#19979;&#20320;&#26371;&#24590;&#40636;&#20570;&#65311;"]
+        ]
+      },
+      {
+        phrase: "Pastries",
+        meaning: "&#31957;&#40670;&#65307;&#37221;&#30382;&#40670;&#24515;",
+        note: "Singular: pastry. Plural: pastries.",
+        examples: [
+          ["The bakery sells fresh pastries every morning.", "&#37027;&#23478;&#40629;&#21253;&#24215;&#27599;&#22825;&#26089;&#19978;&#37117;&#36067;&#26032;&#39854;&#31957;&#40670;&#12290;"],
+          ["I bought two pastries for breakfast.", "&#25105;&#36023;&#20102;&#20841;&#20491;&#40670;&#24515;&#30070;&#26089;&#39184;&#12290;"]
+        ]
+      }
+    ];
+
+    const cards = document.querySelector("#cards");
+    const searchBox = document.querySelector("#searchBox");
+    const voiceSelect = document.querySelector("#voiceSelect");
+    const testVoice = document.querySelector("#testVoice");
+    const voiceHint = document.querySelector("#voiceHint");
+    let preferredVoice = null;
+
+    function getEnglishVoices() {
+      if (!("speechSynthesis" in window)) {
+        return [];
+      }
+
+      return window.speechSynthesis
+        .getVoices()
+        .filter((voice) => /^en[-_]/i.test(voice.lang));
+    }
+
+    function voiceScore(voice) {
+      const name = voice.name.toLowerCase();
+      const lang = voice.lang.toLowerCase();
+      let score = 0;
+
+      if (name.includes("natural")) score += 80;
+      if (name.includes("neural")) score += 70;
+      if (name.includes("online")) score += 60;
+      if (name.includes("jenny")) score += 55;
+      if (name.includes("aria")) score += 55;
+      if (name.includes("sonia")) score += 45;
+      if (name.includes("libby")) score += 45;
+      if (name.includes("guy")) score += 35;
+      if (name.includes("google")) score += 25;
+      if (lang === "en-us") score += 10;
+      if (voice.localService === false) score += 10;
+
+      return score;
+    }
+
+    function updateVoiceHint() {
+      if (!preferredVoice) {
+        voiceHint.textContent = "No English voice was found in this browser.";
+        return;
+      }
+
+      const soundsNatural = voiceScore(preferredVoice) >= 60;
+      voiceHint.textContent = soundsNatural
+        ? `Using ${preferredVoice.name}. This is likely one of the more natural voices available here.`
+        : `Using ${preferredVoice.name}. This browser may only have basic system voices installed.`;
+    }
+
+    function choosePreferredVoice() {
+      const englishVoices = getEnglishVoices();
+      const savedVoiceName = localStorage.getItem("preferredEnglishVoice");
+      const savedVoice = englishVoices.find((voice) => voice.name === savedVoiceName);
+
+      preferredVoice = savedVoice || englishVoices
+        .slice()
+        .sort((a, b) => voiceScore(b) - voiceScore(a))[0] || null;
+
+      voiceSelect.innerHTML = englishVoices
+        .slice()
+        .sort((a, b) => voiceScore(b) - voiceScore(a))
+        .map((voice) => {
+          const label = `${voice.name} (${voice.lang})${voice.localService ? "" : " - online"}`;
+          const selected = preferredVoice && voice.name === preferredVoice.name ? " selected" : "";
+          return `<option value="${voice.name.replace(/"/g, "&quot;")}"${selected}>${label}</option>`;
+        })
+        .join("");
+
+      if (!englishVoices.length) {
+        voiceSelect.innerHTML = '<option>No English voices found</option>';
+      }
+
+      updateVoiceHint();
+
+      return preferredVoice;
+    }
+
+    choosePreferredVoice();
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.addEventListener("voiceschanged", choosePreferredVoice);
+    }
+
+    function speak(text) {
+      if (!("speechSynthesis" in window)) {
+        alert("This browser does not support speech playback.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-US";
+      utterance.voice = preferredVoice || choosePreferredVoice();
+      utterance.rate = 0.9;
+      utterance.pitch = 0.98;
+      utterance.volume = 1;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function renderCards(filter = "") {
+      const keyword = filter.trim().toLowerCase();
+      const visiblePatterns = patterns.filter((item) => {
+        const text = [item.phrase, item.note, ...item.examples.flat()].join(" ").toLowerCase();
+        return text.includes(keyword);
+      });
+
+      cards.innerHTML = visiblePatterns.map((item) => `
+        <article class="card">
+          <div class="card-header">
+            <div class="tag">${item.type || "pattern"}</div>
+            <h2>${item.phrase}</h2>
+            <p class="meaning">${item.meaning}</p>
+          </div>
+          <div class="card-body">
+            <p class="pattern-note">${item.note}</p>
+            ${item.examples.map(([english, chinese]) => `
+              <div class="example">
+                <button class="speak" type="button" data-say="${english.replace(/"/g, "&quot;")}" aria-label="Play: ${english.replace(/"/g, "&quot;")}">📣</button>
+                <div>
+                  <p>${english}</p>
+                  <span>${chinese}</span>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        </article>
+      `).join("");
+
+      cards.querySelectorAll(".speak").forEach((button) => {
+        button.addEventListener("click", () => speak(button.dataset.say));
+      });
+    }
+
+    searchBox.addEventListener("input", () => renderCards(searchBox.value));
+    voiceSelect.addEventListener("change", () => {
+      const selectedVoice = getEnglishVoices().find((voice) => voice.name === voiceSelect.value);
+      if (selectedVoice) {
+        preferredVoice = selectedVoice;
+        localStorage.setItem("preferredEnglishVoice", selectedVoice.name);
+        updateVoiceHint();
+        speak("Have you ever tried learning English with sentence patterns?");
+      }
+    });
+    testVoice.addEventListener("click", () => {
+      speak("It sounds like a good idea. I look forward to practicing English with you.");
+    });
+    renderCards();
+
+    if ("serviceWorker" in navigator && location.protocol !== "file:") {
+      navigator.serviceWorker.register("sw.js");
+    }
+  </script>
+</body>
+</html>
