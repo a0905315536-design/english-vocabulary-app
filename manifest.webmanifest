@@ -1,0 +1,19 @@
+{
+  "name": "English Vocabulary Patterns",
+  "short_name": "English Patterns",
+  "description": "A personal English vocabulary and sentence-pattern review app with speech playback.",
+  "start_url": "vocabulary_review.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbfaf7",
+  "theme_color": "#2f7d59",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "english_ai_icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
