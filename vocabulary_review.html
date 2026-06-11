@@ -198,6 +198,39 @@
 
     .cards {
       display: grid;
+      gap: 20px;
+    }
+
+    .date-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    .date-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 16px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(32, 36, 42, 0.07);
+    }
+
+    .date-heading h2 {
+      font-size: 1.08rem;
+    }
+
+    .date-heading span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    .date-cards {
+      display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 16px;
     }
@@ -402,8 +435,8 @@
         <p class="subtitle">&#25226;&#24120;&#29992;&#21477;&#22411;&#25972;&#29702;&#25104;&#21345;&#29255;&#65292;&#27599;&#20491;&#21477;&#22411;&#37117;&#26377;&#31684;&#20363;&#21644;&#35486;&#38899;&#25353;&#37397;&#12290;&#40670;&#19968;&#19979;&#22823;&#32882;&#20844;&#65292;&#23601;&#21487;&#20197;&#29992;&#27604;&#36611;&#33258;&#28982;&#30340;&#33521;&#25991;&#35486;&#38899;&#36319;&#35712;&#12290;</p>
       </div>
       <aside class="stats">
-        <p class="date">2026-06-10</p>
-        <p class="count">34<span>review items</span></p>
+        <p class="date">2026-06-11</p>
+        <p class="count">37<span>review items</span></p>
       </aside>
     </section>
 
@@ -749,6 +782,39 @@
           ["The bakery sells fresh pastries every morning.", "&#37027;&#23478;&#40629;&#21253;&#24215;&#27599;&#22825;&#26089;&#19978;&#37117;&#36067;&#26032;&#39854;&#31957;&#40670;&#12290;"],
           ["I bought two pastries for breakfast.", "&#25105;&#36023;&#20102;&#20841;&#20491;&#40670;&#24515;&#30070;&#26089;&#39184;&#12290;"]
         ]
+      },
+      {
+        phrase: "Almost",
+        type: "word",
+        date: "2026-06-11",
+        meaning: "&#24190;&#20046;&#65307;&#24046;&#19968;&#40670;",
+        note: "Use it when something is very close to happening or being true.",
+        examples: [
+          ["I almost forgot your name.", "&#25105;&#24046;&#40670;&#24536;&#20102;&#20320;&#30340;&#21517;&#23383;&#12290;"],
+          ["We are almost there.", "&#25105;&#20497;&#24555;&#21040;&#20102;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Might",
+        type: "word",
+        date: "2026-06-11",
+        meaning: "&#21487;&#33021;&#26371;",
+        note: "Use it when something is possible but not certain.",
+        examples: [
+          ["I might go out tonight.", "&#25105;&#20170;&#26202;&#21487;&#33021;&#26371;&#20986;&#21435;&#12290;"],
+          ["It might rain later.", "&#31561;&#19968;&#19979;&#21487;&#33021;&#26371;&#19979;&#38632;&#12290;"]
+        ]
+      },
+      {
+        phrase: "Perhaps",
+        type: "word",
+        date: "2026-06-11",
+        meaning: "&#20063;&#35377;&#65307;&#21487;&#33021;",
+        note: "A softer or more formal way to say maybe.",
+        examples: [
+          ["Perhaps we should try again.", "&#20063;&#35377;&#25105;&#20497;&#25033;&#35442;&#20877;&#35430;&#19968;&#27425;&#12290;"],
+          ["Perhaps he is busy right now.", "&#20063;&#35377;&#20182;&#29694;&#22312;&#24456;&#24537;&#12290;"]
+        ]
       }
     ];
 
@@ -850,6 +916,51 @@
       window.speechSynthesis.speak(utterance);
     }
 
+    const dateOverrides = new Map([
+      ["Imagine", "2026-06-10"],
+      ["Cozy", "2026-06-10"],
+      ["Colleague", "2026-06-10"],
+      ["You can ask what they're up to.", "2026-06-10"],
+      ["Chat", "2026-06-10"],
+      ["Simple", "2026-06-10"],
+      ["Situation", "2026-06-10"]
+    ]);
+
+    function getItemDate(item) {
+      return item.date || dateOverrides.get(item.phrase) || "2026-06-09";
+    }
+
+    function renderCard(item) {
+      const phraseText = item.phrase.replace(/"/g, "&quot;");
+      return `
+        <article class="card">
+          <div class="card-header">
+            <div class="tag">${item.type || "pattern"}</div>
+            <div class="phrase-row">
+              <h2>${item.phrase}</h2>
+              <button class="phrase-speak" type="button" data-say="${phraseText}" aria-label="Play word or pattern: ${phraseText}">&#128227;</button>
+            </div>
+            <p class="meaning">${item.meaning}</p>
+          </div>
+          <div class="card-body">
+            <p class="pattern-note">${item.note}</p>
+            ${item.examples.map(([english, chinese]) => {
+              const exampleText = english.replace(/"/g, "&quot;");
+              return `
+                <div class="example">
+                  <button class="speak" type="button" data-say="${exampleText}" aria-label="Play: ${exampleText}">&#128227;</button>
+                  <div>
+                    <p>${english}</p>
+                    <span>${chinese}</span>
+                  </div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </article>
+      `;
+    }
+
     function renderCards(filter = "") {
       const keyword = filter.trim().toLowerCase();
       const visiblePatterns = patterns.filter((item) => {
@@ -881,6 +992,27 @@
           </div>
         </article>
       `).join("");
+
+      const groupedPatterns = visiblePatterns.reduce((groups, item) => {
+        const date = getItemDate(item);
+        if (!groups[date]) groups[date] = [];
+        groups[date].push(item);
+        return groups;
+      }, {});
+
+      cards.innerHTML = Object.entries(groupedPatterns)
+        .sort(([dateA], [dateB]) => dateB.localeCompare(dateA))
+        .map(([date, items]) => `
+          <section class="date-group" aria-label="${date}">
+            <div class="date-heading">
+              <h2>${date}</h2>
+              <span>${items.length} items</span>
+            </div>
+            <div class="date-cards">
+              ${items.map(renderCard).join("")}
+            </div>
+          </section>
+        `).join("");
 
       cards.querySelectorAll(".speak").forEach((button) => {
         button.addEventListener("click", () => speak(button.dataset.say));
